@@ -1,2 +1,3 @@
 # compilationProjet
 Projet de  compilation de GUILBAULT Maxime, MAYOLINI Maxime et...
+Pour compiler => yacc ppascal.y && lex ppascal.l && gcc lex.yy.c my_utils.c
