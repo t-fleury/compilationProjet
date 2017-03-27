@@ -10,41 +10,75 @@ int line = 1;
 
 %error-verbose
 
-%start start
-%token Not And Or Imp Equiv Var True False Def Id
+%start MP
+%token I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq
 
 %left And
-%left Or Imp Equiv
+%left Or Lt Eq
 %nonassoc Not
 %%
 
-start: Progr ;
+MP: L_vart LD C
 
-Progr : VarLoc FuncDef_L Instr_L Expr
-VarLoc : %empty
-       | Var Arg_L ';'
-Instr_L : %empty
-        | Instr_L Instr
-Instr : Affect ';'
-Affect : Id '=' Expr
-FuncDef_L : %empty
-          | FuncDef_L FuncDef
-FuncDef : Def Id '(' Arg_L ')' VarLoc Instr_L Expr ';'
-Arg_L : %empty
-      | Id
-      | Arg_L ',' Id
-Expr_L : %empty
-       | Expr
-       | Expr_L ',' Expr
-Expr : True | False
-     | Id
-     | Id '(' Expr_L ')'
-     | Expr And Expr
-     | Expr Or Expr
-     | Expr Imp Expr
-     | Expr Equiv Expr
-     | Not Expr
-     | '(' Expr ')'
+E: E Pl E
+ | E Mo E
+ | E Mu E
+ | E Or E
+ | E Lt E
+ | E Eq E
+ | E And E
+ | Not E
+ | '(' E ')'
+ | I
+ | V
+ | true
+ | false
+ | V '(' L_args ')'
+ | NewAr TP '[' E ']'
+ | Et
+
+ Et: V '[' E ']'
+   | Et '[' E ']'
+
+C: C Se C
+ | Et Af E
+ | V Af E
+ | Sk
+ | '{' C '}'
+ | If E Th C El C
+ | Wh E Do C
+ | V '(' L_args ')'
+
+ L_args: %empty
+       | L_argsnn
+
+L_argsnn: E
+        | E ',' L_argsnn
+
+L_argt: %empty
+      | L_artgnn
+
+Argt : V ':' TP
+
+TP: T_boo
+  | T_int
+  | T_ar TP
+
+L_vart: %empty
+      | L_vartnn
+
+L_vartnn: Var Argt
+        | L_vartnn ',' Var Argt
+
+D_entp: Dep NPro '(' L_argt ')'
+
+D_entf: Def NFon '(' L_argt ')' ':' TP
+
+D: D_entp L_vart C
+ | D_entf L_vart C
+
+LD: %empty
+  | LD D
 
 %%
 
