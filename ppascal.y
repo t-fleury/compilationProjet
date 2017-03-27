@@ -13,6 +13,7 @@ int line = 1;
 %union{
   char* str;
   int integer;
+}
 
 %start MP
 %token I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq
@@ -60,7 +61,10 @@ L_argsnn: E
         | E ',' L_argsnn
 
 L_argt: %empty
-      | L_artgnn
+      | L_argtnn
+
+L_argtnn: Argt
+        | L_argtnn ',' Argt
 
 Argt : V ':' TP
 
