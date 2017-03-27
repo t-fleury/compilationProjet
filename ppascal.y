@@ -16,7 +16,7 @@ int line = 1;
 }
 
 %start MP
-%token I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq
+%token <string>I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq openPar closePar openCro closeCro openAco closeAco
 
 %left And
 %left Or Lt Eq
@@ -33,26 +33,26 @@ E: E Pl E
  | E Eq E
  | E And E
  | Not E
- | '(' E ')'
+ | openPar E closePar
  | I
  | V
  | true
  | false
- | V '(' L_args ')'
- | NewAr TP '[' E ']'
+ | V openPar L_args closePar
+ | NewAr TP openCro E closeCro
  | Et
 
- Et: V '[' E ']'
-   | Et '[' E ']'
+ Et: V openCro E closeCro
+   | Et openCro E closeCro
 
 C: C Se C
  | Et Af E
  | V Af E
  | Sk
- | '{' C '}'
+ | openAco C closeAco
  | If E Th C El C
  | Wh E Do C
- | V '(' L_args ')'
+ | V openPar L_args closePar
 
  L_args: %empty
        | L_argsnn
@@ -78,9 +78,9 @@ L_vart: %empty
 L_vartnn: Var Argt
         | L_vartnn ',' Var Argt
 
-D_entp: Dep NPro '(' L_argt ')'
+D_entp: Dep NPro openPar L_argt closePar
 
-D_entf: Def NFon '(' L_argt ')' ':' TP
+D_entf: Def NFon openPar L_argt closePar ':' TP
 
 D: D_entp L_vart C
  | D_entf L_vart C
