@@ -12,6 +12,8 @@ I [1-9][0-9]*
 FP [a-zA-Z]*
 
 %%
+boolean	{yylval.str = strdup(yytext);return T_boo;}
+integer	{yylval.str = strdup(yytext);return T_int;}
 array\ of	{yylval.str = strdup(yytext);return T_ar;}
 new\ array\ of {yylval.str = strdup(yytext);return NewAr;}
 var {return Var;}
@@ -22,13 +24,11 @@ defun	{
 {FP}"("	{yylval.str = strdup(yytext);return NFon;}
 defpro	{
 	return Dep;
-	printf("COUCOU JE PASSE 1");
+	printf("COUCOU JE PASSE 2");
 	REJECT;}
 {FP}"("	{yylval.str = strdup(yytext);return NPro;}
 0|{I} {yylval.str = strdup(yytext);return I;}
 {V} {yylval.str = strdup(yytext);return V;}
-boolean	{yylval.str = strdup(yytext);return T_boo;}
-interger	{yylval.str = strdup(yytext);return T_int;}
 skip  {yylval.str = strdup(yytext);return Sk;}
 if  {yylval.str = strdup(yytext);return If;}
 then {yylval.str = strdup(yytext);return Th;}
@@ -50,12 +50,14 @@ false  {yylval.str = strdup(yytext);return false;}
 "]" {return closeCro;}
 "{" {return openAco;}
 "}" {return closeAco;}
+":" {return DPoint;}
+","	{return Vir;}
 and {return And;}
 or {return Or;}
 not {return Not;}
 [/t]+ {;}
 [/n]  {;}
-. {;}
+. {}
 %%
 int yywrap(){
 	return    1;
