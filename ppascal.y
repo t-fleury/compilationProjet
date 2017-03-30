@@ -20,8 +20,15 @@ int line = 1;
 %start MP
 %token <str> I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq openPar closePar openCro closeCro openAco closeAco DPoint Vir
 %type <str> TP
+
+%left Vir
+%left Af
+%left If Th El Wh Do
+%left Mo Mu Pl
 %left And
 %left Or Lt Eq
+%right openPar openCro openAco
+
 %nonassoc Not
 %%
 
@@ -30,7 +37,7 @@ MP: L_vart LD C
 E: E Pl E
  | E Mo E
  | E Mu E
- | E Or E 
+ | E Or E
  | E Lt E
  | E Eq E
  | E And E

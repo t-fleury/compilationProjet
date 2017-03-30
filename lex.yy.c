@@ -371,25 +371,25 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_acclist[181] =
     {   0,
-       42,   40,   41,   41,   24,   36,   37,   40,   41,   25,
+       42,   40,   41,   41,   24,   38,   39,   40,   41,   25,
        40,   41,   21,   40,   41,   19,   40,   41,   31,   40,
-       41,   20,   40,   41,   38,   39,   40,   41,    8,   40,
+       41,   20,   40,   41,   35,   36,   40,   41,    8,   40,
        41,    8,   40,   41,   30,   40,   41,   18,   40,   41,
-       40,   41,   22,   40,   41,   35,   40,   41,   26,   40,
-       41,   27,   40,   41,   35,   40,   41,   35,   40,   41,
-       35,   40,   41,   35,   40,   41,   35,   40,   41,   35,
-       40,   41,   35,   39,   40,   41,   35,   40,   41,   35,
-       40,   41,   35,   38,   40,   41,   35,   40,   41,   35,
-       40,   41,   28,   40,   41,   29,   40,   41,   38,    8,
+       40,   41,   22,   40,   41,   37,   40,   41,   26,   40,
+       41,   27,   40,   41,   37,   40,   41,   37,   40,   41,
+       37,   40,   41,   37,   40,   41,   37,   40,   41,   37,
+       40,   41,   36,   37,   40,   41,   37,   40,   41,   37,
+       40,   41,   35,   37,   40,   41,   37,   40,   41,   37,
+       40,   41,   28,   40,   41,   29,   40,   41,   35,    8,
 
-       17,   23,   36,   37,   35,   35,   35,   35,   35,   35,
-       14,   35,   35,   35,   10,   35,   35,   35,   35,   33,
-       35,   35,   35,   35,   35,   38,   35,   35,   32,   35,
-       35,   35,   35,   35,   35,   35,   35,   34,   35,   35,
-       35,   35,    5,   35,   35,   35,   35,   35,   35,   12,
-       35,   35,   35,    9,   35,   11,   35,   15,   35,   35,
-       35,   35,   35,    6,   35,   16,   35,   35,   13,   35,
-       35,    7,   35,   35,    1,   35,    2,   35,    3,    4
+       17,   23,   38,   39,   37,   37,   37,   37,   37,   37,
+       14,   37,   37,   37,   10,   37,   37,   37,   37,   33,
+       37,   37,   37,   37,   35,   37,   37,   37,   32,   37,
+       37,   37,   37,   37,   37,   37,   37,   34,   37,   37,
+       37,   37,    5,   37,   37,   37,   37,   37,   37,   12,
+       37,   37,   37,    9,   37,   11,   37,   15,   37,   37,
+       37,   37,   37,    6,   37,   16,   37,   37,   13,   37,
+       37,    7,   37,   37,    1,   37,    2,   37,    3,    4
     } ;
 
 static yyconst flex_int16_t yy_accept[112] =
@@ -996,12 +996,12 @@ YY_RULE_SETUP
 case 24:
 YY_RULE_SETUP
 #line 46 "ppascal.l"
-{return openPar;}
+{printf("ouverture parenthèse");return openPar;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 47 "ppascal.l"
-{return closePar;}
+{printf("fermeture parenthèse");return closePar;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
@@ -1051,27 +1051,27 @@ YY_RULE_SETUP
 case 35:
 YY_RULE_SETUP
 #line 57 "ppascal.l"
-{yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
+{;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 58 "ppascal.l"
-{yylval.str = strdup(yytext);return NFon;}
+{;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 59 "ppascal.l"
-{yylval.str = strdup(yytext);return NPro;}
+{yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 60 "ppascal.l"
-{;}
+{yylval.str = strdup(yytext);return NFon;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 61 "ppascal.l"
-{;}
+{yylval.str = strdup(yytext);return NPro;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP

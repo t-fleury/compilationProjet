@@ -43,8 +43,8 @@ false {yylval.str = strdup(yytext);return false;}
 "*" {yylval.str = strdup(yytext);return Mu;}
 "="	{yylval.str = strdup(yytext);return Eq;}
 "<="	{yylval.str = strdup(yytext);return Lt;}
-"(" {return openPar;}
-")" {return closePar;}
+"(" {printf("ouverture parenthèse");return openPar;}
+")" {printf("fermeture parenthèse");return closePar;}
 "[" {return openCro;}
 "]" {return closeCro;}
 "{" {return openAco;}
@@ -54,11 +54,11 @@ false {yylval.str = strdup(yytext);return false;}
 "and" {return And;}
 "or" {return Or;}
 "not" {return Not;}
+[/t]+ {;}
+[/n]  {;}
 {V} {yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
 {FP}"("	{yylval.str = strdup(yytext);return NFon;}
 {FP}"("	{yylval.str = strdup(yytext);return NPro;}
-[/t]+ {;}
-[/n]  {;}
 . {;}
 %%
 int yywrap(){
