@@ -7,8 +7,8 @@ int fileno(FILE*);
 char* strdup(const char *s);
 %}
 
-V [a-zA-Z][a-zA-Z0-9]*
-I [1-9][0-9]*
+V [a-zA-Z]+[a-zA-Z0-9]*
+I [1-9][0-9]*|0
 FP [a-zA-Z]*
 
 %%
@@ -20,23 +20,22 @@ var {return Var;}
 defun	{
 	return Def;
 	printf("COUCOU JE PASSE 1");
-	REJECT;}
-{FP}"("	{yylval.str = strdup(yytext);return NFon;}
+	REJECT;
+}
 defpro	{
 	return Dep;
 	printf("COUCOU JE PASSE 2");
-	REJECT;}
-{FP}"("	{yylval.str = strdup(yytext);return NPro;}
+	REJECT;
+}
 0|{I} {yylval.str = strdup(yytext);return I;}
-{V} {yylval.str = strdup(yytext);return V;}
 skip  {yylval.str = strdup(yytext);return Sk;}
-if  {yylval.str = strdup(yytext);return If;}
-then {yylval.str = strdup(yytext);return Th;}
-else {yylval.str = strdup(yytext);return El;}
-while {yylval.str = strdup(yytext);return Wh;}
-do  {yylval.str = strdup(yytext);return Do;}
-true  {yylval.str = strdup(yytext);return true;}
-false  {yylval.str = strdup(yytext);return false;}
+"if"  {yylval.str = strdup(yytext);return If;}
+"then" {yylval.str = strdup(yytext);return Th;}
+"else" {yylval.str = strdup(yytext);return El;}
+"while" {yylval.str = strdup(yytext);return Wh;}
+"do"  {yylval.str = strdup(yytext);return Do;}
+true {yylval.str = strdup(yytext);return true;}
+false {yylval.str = strdup(yytext);return false;}
 ":="  {yylval.str = strdup(yytext);return Af;}
 ";" {yylval.str = strdup(yytext);return Se;}
 "+" {yylval.str = strdup(yytext);return Pl;}
@@ -52,12 +51,15 @@ false  {yylval.str = strdup(yytext);return false;}
 "}" {return closeAco;}
 ":" {return DPoint;}
 ","	{return Vir;}
-and {return And;}
-or {return Or;}
-not {return Not;}
+"and" {return And;}
+"or" {return Or;}
+"not" {return Not;}
+{V} {yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
+{FP}"("	{yylval.str = strdup(yytext);return NFon;}
+{FP}"("	{yylval.str = strdup(yytext);return NPro;}
 [/t]+ {;}
 [/n]  {;}
-. {}
+. {;}
 %%
 int yywrap(){
 	return    1;

@@ -371,25 +371,25 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_acclist[181] =
     {   0,
-       42,   40,   41,   41,    7,    9,   27,   40,   41,   28,
-       40,   41,   24,   40,   41,   22,   40,   41,   34,   40,
-       41,   23,   40,   41,   38,   39,   40,   41,   10,   40,
-       41,   10,   40,   41,   33,   40,   41,   21,   40,   41,
-       40,   41,   25,   40,   41,   11,   40,   41,   29,   40,
-       41,   30,   40,   41,   11,   40,   41,   11,   40,   41,
-       11,   40,   41,   11,   40,   41,   11,   40,   41,   11,
-       40,   41,   11,   39,   40,   41,   11,   40,   41,   11,
-       40,   41,   11,   38,   40,   41,   11,   40,   41,   11,
-       40,   41,   31,   40,   41,   32,   40,   41,   38,   10,
+       42,   40,   41,   41,   24,   36,   37,   40,   41,   25,
+       40,   41,   21,   40,   41,   19,   40,   41,   31,   40,
+       41,   20,   40,   41,   38,   39,   40,   41,    8,   40,
+       41,    8,   40,   41,   30,   40,   41,   18,   40,   41,
+       40,   41,   22,   40,   41,   35,   40,   41,   26,   40,
+       41,   27,   40,   41,   35,   40,   41,   35,   40,   41,
+       35,   40,   41,   35,   40,   41,   35,   40,   41,   35,
+       40,   41,   35,   39,   40,   41,   35,   40,   41,   35,
+       40,   41,   35,   38,   40,   41,   35,   40,   41,   35,
+       40,   41,   28,   40,   41,   29,   40,   41,   38,    8,
 
-       20,   26,    7,    9,   11,   11,   11,   11,   11,   11,
-       11,   17,   11,   11,   11,   13,   11,   11,   11,   11,
-       36,   11,   11,   11,   11,   38,   11,   11,   11,   35,
-       11,   11,   11,   11,   11,   11,   11,   11,   37,   11,
-       11,   11,    5,   11,   11,   11,   11,   11,   11,   11,
-       15,   11,   11,   11,   12,   11,   14,   11,   18,   11,
-       11,   11,   11,    6,   11,   11,   19,   11,   11,   16,
-       11,    8,   11,   11,    1,   11,    2,   11,    3,    4
+       17,   23,   36,   37,   35,   35,   35,   35,   35,   35,
+       14,   35,   35,   35,   10,   35,   35,   35,   35,   33,
+       35,   35,   35,   35,   35,   38,   35,   35,   32,   35,
+       35,   35,   35,   35,   35,   35,   35,   34,   35,   35,
+       35,   35,    5,   35,   35,   35,   35,   35,   35,   12,
+       35,   35,   35,    9,   35,   11,   35,   15,   35,   35,
+       35,   35,   35,    6,   35,   16,   35,   35,   13,   35,
+       35,    7,   35,   35,    1,   35,    2,   35,    3,    4
     } ;
 
 static yyconst flex_int16_t yy_accept[112] =
@@ -901,187 +901,189 @@ YY_RULE_SETUP
 {
 	return Def;
 	printf("COUCOU JE PASSE 1");
-	REJECT;}
+	REJECT;
+}
 	YY_BREAK
 case 7:
-YY_RULE_SETUP
-#line 24 "ppascal.l"
-{yylval.str = strdup(yytext);return NFon;}
-	YY_BREAK
-case 8:
 YY_RULE_SETUP
 #line 25 "ppascal.l"
 {
 	return Dep;
 	printf("COUCOU JE PASSE 2");
-	REJECT;}
+	REJECT;
+}
 	YY_BREAK
-case 9:
-YY_RULE_SETUP
-#line 29 "ppascal.l"
-{yylval.str = strdup(yytext);return NPro;}
-	YY_BREAK
-case 10:
+case 8:
 YY_RULE_SETUP
 #line 30 "ppascal.l"
 {yylval.str = strdup(yytext);return I;}
 	YY_BREAK
-case 11:
+case 9:
 YY_RULE_SETUP
 #line 31 "ppascal.l"
-{yylval.str = strdup(yytext);return V;}
+{yylval.str = strdup(yytext);return Sk;}
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 32 "ppascal.l"
+{yylval.str = strdup(yytext);return If;}
+	YY_BREAK
+case 11:
+YY_RULE_SETUP
+#line 33 "ppascal.l"
+{yylval.str = strdup(yytext);return Th;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 32 "ppascal.l"
-{yylval.str = strdup(yytext);return Sk;}
+#line 34 "ppascal.l"
+{yylval.str = strdup(yytext);return El;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 33 "ppascal.l"
-{yylval.str = strdup(yytext);return If;}
+#line 35 "ppascal.l"
+{yylval.str = strdup(yytext);return Wh;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 34 "ppascal.l"
-{yylval.str = strdup(yytext);return Th;}
+#line 36 "ppascal.l"
+{yylval.str = strdup(yytext);return Do;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "ppascal.l"
-{yylval.str = strdup(yytext);return El;}
+#line 37 "ppascal.l"
+{yylval.str = strdup(yytext);return true;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 36 "ppascal.l"
-{yylval.str = strdup(yytext);return Wh;}
+#line 38 "ppascal.l"
+{yylval.str = strdup(yytext);return false;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 37 "ppascal.l"
-{yylval.str = strdup(yytext);return Do;}
+#line 39 "ppascal.l"
+{yylval.str = strdup(yytext);return Af;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 38 "ppascal.l"
-{yylval.str = strdup(yytext);return true;}
+#line 40 "ppascal.l"
+{yylval.str = strdup(yytext);return Se;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 39 "ppascal.l"
-{yylval.str = strdup(yytext);return false;}
+#line 41 "ppascal.l"
+{yylval.str = strdup(yytext);return Pl;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 40 "ppascal.l"
-{yylval.str = strdup(yytext);return Af;}
+#line 42 "ppascal.l"
+{yylval.str = strdup(yytext);return Mo;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 41 "ppascal.l"
-{yylval.str = strdup(yytext);return Se;}
+#line 43 "ppascal.l"
+{yylval.str = strdup(yytext);return Mu;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "ppascal.l"
-{yylval.str = strdup(yytext);return Pl;}
+#line 44 "ppascal.l"
+{yylval.str = strdup(yytext);return Eq;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 43 "ppascal.l"
-{yylval.str = strdup(yytext);return Mo;}
+#line 45 "ppascal.l"
+{yylval.str = strdup(yytext);return Lt;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 44 "ppascal.l"
-{yylval.str = strdup(yytext);return Mu;}
+#line 46 "ppascal.l"
+{return openPar;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 45 "ppascal.l"
-{yylval.str = strdup(yytext);return Eq;}
+#line 47 "ppascal.l"
+{return closePar;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 46 "ppascal.l"
-{yylval.str = strdup(yytext);return Lt;}
+#line 48 "ppascal.l"
+{return openCro;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 47 "ppascal.l"
-{return openPar;}
+#line 49 "ppascal.l"
+{return closeCro;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 48 "ppascal.l"
-{return closePar;}
+#line 50 "ppascal.l"
+{return openAco;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 49 "ppascal.l"
-{return openCro;}
+#line 51 "ppascal.l"
+{return closeAco;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 50 "ppascal.l"
-{return closeCro;}
+#line 52 "ppascal.l"
+{return DPoint;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 51 "ppascal.l"
-{return openAco;}
+#line 53 "ppascal.l"
+{return Vir;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 52 "ppascal.l"
-{return closeAco;}
+#line 54 "ppascal.l"
+{return And;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 53 "ppascal.l"
-{return DPoint;}
+#line 55 "ppascal.l"
+{return Or;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 54 "ppascal.l"
-{return Vir;}
+#line 56 "ppascal.l"
+{return Not;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 55 "ppascal.l"
-{return And;}
+#line 57 "ppascal.l"
+{yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 56 "ppascal.l"
-{return Or;}
+#line 58 "ppascal.l"
+{yylval.str = strdup(yytext);return NFon;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 57 "ppascal.l"
-{return Not;}
+#line 59 "ppascal.l"
+{yylval.str = strdup(yytext);return NPro;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 58 "ppascal.l"
+#line 60 "ppascal.l"
 {;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 59 "ppascal.l"
+#line 61 "ppascal.l"
 {;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 60 "ppascal.l"
-{}
+#line 62 "ppascal.l"
+{;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 61 "ppascal.l"
+#line 63 "ppascal.l"
 ECHO;
 	YY_BREAK
-#line 1085 "lex.yy.c"
+#line 1087 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -2056,7 +2058,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 61 "ppascal.l"
+#line 63 "ppascal.l"
 
 
 int yywrap(){

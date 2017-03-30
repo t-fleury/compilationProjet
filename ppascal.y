@@ -30,7 +30,7 @@ MP: L_vart LD C
 E: E Pl E
  | E Mo E
  | E Mu E
- | E Or E
+ | E Or E 
  | E Lt E
  | E Eq E
  | E And E
@@ -57,12 +57,16 @@ C: C Se C
  | V openPar L_args closePar
 
 L_args: %empty
-        | E
-        | E Vir L_args
+        | L_argsnn
+
+L_argsnn: E
+        | E Vir L_argsnn
 
 L_argt: %empty
-        | Argt
-        | L_argt Vir Argt
+        | L_argtnn
+
+L_argtnn: Argt
+        | L_argtnn Vir Argt
 
 Argt : V DPoint TP
 
@@ -71,8 +75,10 @@ TP: T_boo
   | T_ar TP
 
 L_vart: %empty
-        |Var Argt
-        |L_vart Vir Var Argt
+        |L_vartnn
+
+L_vartnn: Var Argt
+        | L_vartnn Vir Var Argt
 
 D_entp: Dep NPro openPar L_argt closePar
 
@@ -92,5 +98,9 @@ void yyerror(const char *s){
 }
 
 int main(int argn, char **argv){
+  /*int token;
+   while ((token = yylex()) != 0)
+       printf("Token: %d (%s)\n", token, yytext);
+   return 0;*/
   yyparse();
 }
