@@ -29,11 +29,11 @@ defpro	{
 }
 0|{I} {yylval.str = strdup(yytext);return I;}
 skip  {yylval.str = strdup(yytext);return Sk;}
-"if"  {yylval.str = strdup(yytext);return If;}
-"then" {yylval.str = strdup(yytext);return Th;}
-"else" {yylval.str = strdup(yytext);return El;}
-"while" {yylval.str = strdup(yytext);return Wh;}
-"do"  {yylval.str = strdup(yytext);return Do;}
+if  {yylval.str = strdup(yytext);return If;}
+then {yylval.str = strdup(yytext);return Th;}
+else {yylval.str = strdup(yytext);return El;}
+while {yylval.str = strdup(yytext);return Wh;}
+do  {yylval.str = strdup(yytext);return Do;}
 true {yylval.str = strdup(yytext);return true;}
 false {yylval.str = strdup(yytext);return false;}
 ":="  {yylval.str = strdup(yytext);return Af;}
@@ -43,8 +43,8 @@ false {yylval.str = strdup(yytext);return false;}
 "*" {yylval.str = strdup(yytext);return Mu;}
 "="	{yylval.str = strdup(yytext);return Eq;}
 "<="	{yylval.str = strdup(yytext);return Lt;}
-"(" {printf("ouverture parenthèse");return openPar;}
-")" {printf("fermeture parenthèse");return closePar;}
+"(" {printf("ouverture parenthèse\n");return openPar;}
+")" {printf("fermeture parenthèse\n");return closePar;}
 "[" {return openCro;}
 "]" {return closeCro;}
 "{" {return openAco;}
@@ -56,7 +56,7 @@ false {yylval.str = strdup(yytext);return false;}
 "not" {return Not;}
 [/t]+ {;}
 [/n]  {;}
-{V} {yylval.str = strdup(yytext);printf(" variable :%s\n",strdup(yytext));return V;}
+{V} {yylval.str = strdup(yytext);printf("variable : %s\n",strdup(yytext));return V;}
 {FP}"("	{yylval.str = strdup(yytext);return NFon;}
 {FP}"("	{yylval.str = strdup(yytext);return NPro;}
 . {;}

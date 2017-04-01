@@ -26,7 +26,7 @@ int line = 1;
 %left If Th El Wh Do
 %left Mo Mu Pl
 %left And
-%left Or Lt Eq
+%nonassoc Or Lt Eq
 %right openPar openCro openAco
 
 %nonassoc Not
@@ -36,32 +36,37 @@ MP: L_vart LD C
 
 E: E Pl E
  | E Mo E
- | E Mu E
  | E Or E
  | E Lt E
  | E Eq E
  | E And E
+ | E Mu E
  | Not E
- | openPar E closePar
+ | V openPar L_args closePar
+ | Et
+ | F
+
+F: openPar E closePar
  | I
+ | Mo I
  | V
  | true
  | false
- | V openPar L_args closePar
  | NewAr TP openCro E closeCro
- | Et
 
  Et: V openCro E closeCro
    | Et openCro E closeCro
 
-C: C Se C
- | Et Af E
+C0: Et Af E
  | V Af E
  | Sk
  | openAco C closeAco
- | If E Th C El C
- | Wh E Do C
+ | If E Th C0 El C0
+ | Wh E Do C0
  | V openPar L_args closePar
+
+C: C Se C0
+ | C0
 
 L_args: %empty
         | L_argsnn
