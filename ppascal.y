@@ -92,9 +92,9 @@ L_vart: %empty
 L_vartnn: Var Argt
         | L_vartnn Vir Var Argt
 
-D_entp: Dep NPro openPar L_argt closePar
+D_entp: Dep V openPar L_argt closePar
 
-D_entf: Def NFon openPar L_argt closePar DPoint TP
+D_entf: Def V openPar L_argt closePar DPoint TP
 
 D: D_entp L_vart C
  | D_entf L_vart C

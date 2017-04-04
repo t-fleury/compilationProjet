@@ -7,59 +7,56 @@ int fileno(FILE*);
 char* strdup(const char *s);
 %}
 
+%s Comment
+
 V [a-zA-Z]+[a-zA-Z0-9]*
-I [1-9][0-9]*|0
-FP [a-zA-Z]*
+I [1-9][0-9]*
 
 %%
-boolean	{yylval.str = strdup(yytext);return T_boo;}
-integer	{yylval.str = strdup(yytext);return T_int;}
-array\ of	{yylval.str = strdup(yytext);return T_ar;}
-new\ array\ of {yylval.str = strdup(yytext);return NewAr;}
-var {return Var;}
-defun	{
-	return Def;
-	printf("COUCOU JE PASSE 1");
-	REJECT;
+<INITIAL>{
+	boolean	{return T_boo;}
+	integer	{return T_int;}
+	array\ of	{return T_ar;}
+	new\ array\ of {return NewAr;}
+	var {return Var;}
+	defun	{return Def;}
+	defpro	{return Dep;}
+	{I} {yylval.str = strdup(yytext);return I;}
+	skip  {return Sk;}
+	if  {return If;}
+	then {return Th;}
+	else {return El;}
+	while {return Wh;}
+	do  {return Do;}
+	true {return true;}
+	false {return false;}
+	":="  {return Af;}
+	";" {return Se;}
+	"+" {return Pl;}
+	"-" {return Mo;}
+	"*" {return Mu;}
+	"="	{return Eq;}
+	"<="	{return Lt;}
+	"(" {return openPar;}
+	")" {return closePar;}
+	"[" {return openCro;}
+	"]" {return closeCro;}
+	"{" {return openAco;}
+	"}" {return closeAco;}
+	":" {return DPoint;}
+	","	{return Vir;}
+	"and" {return And;}
+	"or" {return Or;}
+	"not" {return Not;}
+	{V} {yylval.str = strdup(yytext);return V;}
+	"/*" {BEGIN Comment;}
+	[ /t/n]  {;}
+	. {;}
 }
-defpro	{
-	return Dep;
-	printf("COUCOU JE PASSE 2");
-	REJECT;
+<Comment>{
+	"*/" {BEGIN INITIAL;}
+	. {;}
 }
-0|{I} {yylval.str = strdup(yytext);return I;}
-skip  {yylval.str = strdup(yytext);return Sk;}
-if  {yylval.str = strdup(yytext);return If;}
-then {yylval.str = strdup(yytext);return Th;}
-else {yylval.str = strdup(yytext);return El;}
-while {yylval.str = strdup(yytext);return Wh;}
-do  {yylval.str = strdup(yytext);return Do;}
-true {yylval.str = strdup(yytext);return true;}
-false {yylval.str = strdup(yytext);return false;}
-":="  {yylval.str = strdup(yytext);return Af;}
-";" {yylval.str = strdup(yytext);return Se;}
-"+" {yylval.str = strdup(yytext);return Pl;}
-"-" {yylval.str = strdup(yytext);return Mo;}
-"*" {yylval.str = strdup(yytext);return Mu;}
-"="	{yylval.str = strdup(yytext);return Eq;}
-"<="	{yylval.str = strdup(yytext);return Lt;}
-"(" {printf("ouverture parenthèse\n");return openPar;}
-")" {printf("fermeture parenthèse\n");return closePar;}
-"[" {return openCro;}
-"]" {return closeCro;}
-"{" {return openAco;}
-"}" {return closeAco;}
-":" {return DPoint;}
-","	{return Vir;}
-"and" {return And;}
-"or" {return Or;}
-"not" {return Not;}
-[/t]+ {;}
-[/n]  {;}
-{V} {yylval.str = strdup(yytext);printf("variable : %s\n",strdup(yytext));return V;}
-{FP}"("	{yylval.str = strdup(yytext);return NFon;}
-{FP}"("	{yylval.str = strdup(yytext);return NPro;}
-. {;}
 %%
 int yywrap(){
 	return    1;
