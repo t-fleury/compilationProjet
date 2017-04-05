@@ -3,6 +3,7 @@
 #include  <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include "PPutils.h"
 
 int yylex();
 void yyerror(const char*);
@@ -13,41 +14,47 @@ int line = 1;
 %error-verbose
 
 %union{
+  struct noeud* node;
   char* str;
   int integer;
 }
 
 %start MP
-%token <str> I V T_ar NFon NPro NewAr T_boo T_int Def Dep Sk Af true false Se If Th El Var Wh Do Pl Mo Mu And Or Not Lt Eq openPar closePar openCro closeCro openAco closeAco DPoint Vir
-%type <str> TP
+%token T_boo T_int T_ar
+%token<str> I V NFon NPro NewAr true false Var openPar closePar openCro closeCro openAco closeAco DPoint Vir
+%token<node> Mp Def Dep Af Se If Th El Wh Do Pl Mo Mu And Or Not Lt Eq Sk Ind Afc AfInd Jp Jz St Param Call Ret
+%type<integer> TP
+%type<node> MP E Et C L_argsnn L_argtnn Argt
 
 %left Vir
 %left Af
 %left If Th El Wh Do
 %left Mo Mu Pl
 %left And
+%left Se
 %nonassoc Or Lt Eq
 %right openPar openCro openAco
 
 %nonassoc Not
+
 %%
+MP: L_vart LD C {
+  $$ = Nalloc();
+  $$ = create_Node("Mp", Mp, $3, NULL);
+}
 
-MP: L_vart LD C
-
-E: E Pl E
- | E Mo E
- | E Or E
- | E Lt E
- | E Eq E
- | E And E
- | E Mu E
+E: E Pl E {$$ = create_Node("Pl",$2,$1,$3);}
+ | E Mo E {$$ = create_Node("Mo",$2,$1,$3);}
+ | E Or E {$$ = create_Node("Or",$2,$1,$3);}
+ | E Lt E {$$ = create_Node("Lt",$2,$1,$3);}
+ | E Eq E {$$ = create_Node("Eq",$2,$1,$3);}
+ | E And E {$$ = create_Node("And",$2,$1,$3);}
+ | E Mu E {$$ = create_Node("Mu",$2,$1,$3);}
  | Not E
  | V openPar L_args closePar
  | Et
- | F
-
-F: openPar E closePar
- | I
+ | openPar E closePar
+ | I  {$$ = create_Node()}
  | Mo I
  | V
  | true
@@ -57,16 +64,14 @@ F: openPar E closePar
  Et: V openCro E closeCro
    | Et openCro E closeCro
 
-C0: Et Af E
+C: Et Af E
  | V Af E
  | Sk
  | openAco C closeAco
- | If E Th C0 El C0
- | Wh E Do C0
+ | If E Th C El C
+ | Wh E Do C
  | V openPar L_args closePar
-
-C: C Se C0
- | C0
+ | C Se C
 
 L_args: %empty
         | L_argsnn
@@ -82,9 +87,9 @@ L_argtnn: Argt
 
 Argt : V DPoint TP
 
-TP: T_boo
-  | T_int
-  | T_ar TP
+TP: T_boo  {$$ = T_boo;}
+  | T_int  {$$ = T_int;}
+  | T_ar TP {;}
 
 L_vart: %empty
         |L_vartnn

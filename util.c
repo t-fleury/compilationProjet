@@ -4,9 +4,9 @@
 #include "environ.h"
 #include "util.h"
 
-NOE Nalloc()
+Node Nalloc()
 {
-  return((NOE)malloc(sizeof(struct noeud)));
+  return((Node)malloc(sizeof(struct noeud)));
 }
 
 LFON Lfonalloc()
@@ -14,12 +14,12 @@ LFON Lfonalloc()
   return (LFON)malloc(sizeof(struct cellfon));
 }
 
-void prefix(NOE n)
+void prefix(Node n)
 /* ecrit l'expression n en notation prefixe*/
 { if(n != NULL)
     {printf("%s ",n->ETIQ);
-      prefix(n->FG);
-      prefix(n->FD);
+      prefix(n->leftChild);
+      prefix(n->rightChild);
     };
 }
 
@@ -43,9 +43,6 @@ ENV copier_env(ENV env){
   return copie_env;
 }
 
-/***** A faire ******/
-char* nomop(int codop) {}
-
 
 //Regarde d'abord dans l'environnement rho_lc (environnement local)
 ENV rech2(char *chaine, ENV rho_gb, ENV rho_lc){
@@ -55,6 +52,3 @@ ENV rech2(char *chaine, ENV rho_gb, ENV rho_lc){
   else
     return rech(chaine,rho_gb);
 }
-
-
-

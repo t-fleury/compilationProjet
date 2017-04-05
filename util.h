@@ -6,12 +6,11 @@
 
 /* ----------------------------types--------------------------------------------*/
 
-
 /* commande := arbre abstrait */
 typedef struct noeud{
   int codop;  /* I,V, operateur */
   char *ETIQ;
-  struct noeud *FG, *FD;} *NOE;
+  struct noeud *rightChild, *leftChild;} *Node;
 
 /* biliste de var ou param */
 typedef struct{
@@ -23,7 +22,7 @@ typedef struct cellfon{
   char *ID;
   BILENV PARAM;    /* pametres formels types   */
   BILENV VARLOC;   /* variables locales typees */
-  NOE CORPS;
+  Node CORPS;
   struct cellfon *SUIV;} *LFON;
 
 /* biliste de fonctions */
@@ -35,16 +34,14 @@ typedef struct{
 /*------------------FONCTIONS -----------------------------------------------*/
 /*---------------------------------------------------------------------------*/
 extern int yylex();          /* fonction generee par flex                    */
-extern int yyerror();        /* fonction generee par flex/bison              */
 /*---------------------allocation memoire------------------------------------*/
-extern NOE Nalloc();         /* retourne un NOE                              */
+extern Node Nalloc();         /* retourne un Node                              */
 extern LFON  Lfonalloc();    /* retourne un LFON                             */
 /*---------------------parcours d'arbres-------------------------------------*/
-extern void prefix(NOE n);   /* ecrit l'expression n en notation prefixe     */
+extern void prefix(Node n);   /* ecrit l'expression n en notation prefixe     */
 /*---------------------environnements----------------------------------------*/
 extern ENV creer_env(char *etiq, int val, TYPE type);/*pointe vers cette var            */
 extern ENV copier_env(ENV env);/*pointe vers une copie                     */
-extern char *nomop(int codop);/* traduit entier vers chaine (= nom operation)*/
 /* retourne la position de chaine (rho_lc est prioritaire) */
 extern ENV rech2(char *chaine, ENV rho_gb, ENV rho_lc);
 /*---------------------bilistes-de-var---------------------------------------*/
@@ -57,11 +54,11 @@ extern void ecrire_bilenv(BILENV bty);   /* affiche la biliste de quadruplets*/
 /* affecte  la valeur rhs a la variable lhs (rho_lc prioritaire)             */
 extern void affectb(BILENV rho_gb, BILENV rho_lc, char *lhs, int rhs);
 /*---------------------fonctions --------------------------------------------*/
-extern LFON creer_fon(char *nfon, BILENV lparam,BILENV lvars,NOE com,TYPE tp);
+extern LFON creer_fon(char *nfon, BILENV lparam,BILENV lvars,Node com,TYPE tp);
 /* pointe vers cette fonction */
 extern LFON copier_fon(LFON lfn);    /* pointe vers une copie                */
 extern void ecrire_fon(LFON bfn);
-extern LFON rechfon(char *chaine, LFON listident);/* retourne la position de chaine*/ 
+extern LFON rechfon(char *chaine, LFON listident);/* retourne la position de chaine*/
 /*---------------------bilistes-de-fonctions --------------------------------*/
 extern BILFON bilfon_vide() ;                  /* retourne une biliste vide  */
 extern BILFON creer_bilfon(LFON pfon);  /* retourne une biliste a un element */
@@ -70,13 +67,12 @@ extern BILFON concatfn(BILFON bfn1, BILFON bfn2);/* retourne la concatenation*/
 extern BILENV allvars(BILFON bfon);/*les variables de bfon (params puis varloc)*/
 extern void ecrire_bilfon(BILFON bfn);   /* affiche la biliste de fonctions  */
 /*---------------------programmes -------------------------------------------*/
-void ecrire_prog(BILENV argb,BILFON argbf,NOE argno);/* affiche le programme */
+void ecrire_prog(BILENV argb,BILFON argbf,Node argno);/* affiche le programme */
 /* --------------------CONSTANTES -------------------------------------------*/
 #define MAXIDENT 16          /* long max d'un identificateur de variable     */
 /*---------------------VARIABLES globales -----------------------------------*/
 /* definies au  debut de y.tab.c , non-declarees dans y.tab.h                */
-//extern NOE syntree;          /* arbre syntaxique                  (y.tab.c)*/
+//extern Node syntree;          /* arbre syntaxique                  (y.tab.c)*/
 //extern BILENV benv;          /* environnement global              (y.tab.c)*/
 //extern BILFON lfonctions;    /* liste des fonctions globale       (y.tab.c)*/
 #endif
-

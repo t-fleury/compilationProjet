@@ -25,4 +25,14 @@ extern char *nomop(int codop); /* traduit entier vers chaine (= nom operation)  
 extern void ecrire_quad(QUAD qd); /* affiche le quadruplet                       */
 extern void ecrire_bilquad(BILQUAD bq); /* affiche la biliste de quadruplets     */
 
+#define Pl 257
+#define Mo 258
+#define Mu 259
+#define Af 260
+#define Afc 261
+#define Sk 262
+#define Jp 263
+#define Jz 264
+#define St 265
+
 #endif
