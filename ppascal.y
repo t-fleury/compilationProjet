@@ -54,7 +54,7 @@ E: E Pl E {$$ = create_Node("Pl",$2,$1,$3);}
  | V openPar L_args closePar
  | Et
  | openPar E closePar
- | I  {$$ = create_Node()}
+ | I  {$$ = create_Node("I",NULL,$1,NULL);}
  | Mo I
  | V
  | true

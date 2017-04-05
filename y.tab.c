@@ -1443,26 +1443,32 @@ yyreduce:
 #line 1444 "y.tab.c" /* yacc.c:1646  */
     break;
 
+  case 14:
+#line 57 "ppascal.y" /* yacc.c:1646  */
+    {(yyval.node) = create_Node("I",NULL,(yyvsp[0].str),NULL);}
+#line 1450 "y.tab.c" /* yacc.c:1646  */
+    break;
+
   case 39:
 #line 90 "ppascal.y" /* yacc.c:1646  */
     {(yyval.integer) = T_boo;}
-#line 1450 "y.tab.c" /* yacc.c:1646  */
+#line 1456 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 91 "ppascal.y" /* yacc.c:1646  */
     {(yyval.integer) = T_int;}
-#line 1456 "y.tab.c" /* yacc.c:1646  */
+#line 1462 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 92 "ppascal.y" /* yacc.c:1646  */
     {;}
-#line 1462 "y.tab.c" /* yacc.c:1646  */
+#line 1468 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1466 "y.tab.c" /* yacc.c:1646  */
+#line 1472 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
