@@ -8,18 +8,17 @@
 char* strdup(const char *s);
 int isdigit(int c);
 
-Node create_Node(char *value, int codop, Node leftChild, Node rightChild){
+Node create_Node(char *value, Node leftChild, Node rightChild){
   Node node = (Node)malloc(sizeof(struct noeud));
-  node->ETIQ = strdup(value);
-  node->codop = codop;
+  node->value = strdup(value);
   node->rightChild = rightChild;
   node->leftChild = leftChild;
   return node;
 }
 
 void printNode(Node node){
-  if(node == NULL){return;}
-  printf("%i : %s ", node->codop, node->ETIQ);
+  if(node == NULL){printf("NULL\n");return;}
+  printf("%s ", node->value);
   if(node->leftChild != NULL){
     printNode(node->leftChild);
     if(node->rightChild != NULL){

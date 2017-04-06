@@ -6,10 +6,10 @@
 
 /* ----------------------------types--------------------------------------------*/
 
+
 /* commande := arbre abstrait */
 typedef struct noeud{
-  int codop;  /* I,V, operateur */
-  char *ETIQ;
+  char* value;
   struct noeud *rightChild, *leftChild;} *Node;
 
 /* biliste de var ou param */

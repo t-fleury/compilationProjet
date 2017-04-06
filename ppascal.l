@@ -50,11 +50,13 @@ I [1-9][0-9]*
 	"not" {return Not;}
 	{V} {yylval.str = strdup(yytext);return V;}
 	"/*" {BEGIN Comment;}
-	[ /t/n]  {;}
+	[ /t]  {;}
+	\/n	{line++;}
 	. {;}
 }
 <Comment>{
 	"*/" {BEGIN INITIAL;}
+	\/n	{line++;}
 	. {;}
 }
 %%

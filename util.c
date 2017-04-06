@@ -17,7 +17,7 @@ LFON Lfonalloc()
 void prefix(Node n)
 /* ecrit l'expression n en notation prefixe*/
 { if(n != NULL)
-    {printf("%s ",n->ETIQ);
+    {printf("%s ",n->value);
       prefix(n->leftChild);
       prefix(n->rightChild);
     };
