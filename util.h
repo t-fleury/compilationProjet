@@ -3,14 +3,9 @@
 #define UTIL_H
 
 #include "environ.h"
+#include "PPutils.h"
 
 /* ----------------------------types--------------------------------------------*/
-
-
-/* commande := arbre abstrait */
-typedef struct noeud{
-  char* value;
-  struct noeud *rightChild, *leftChild;} *Node;
 
 /* biliste de var ou param */
 typedef struct{

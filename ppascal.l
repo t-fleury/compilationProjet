@@ -21,7 +21,7 @@ I [1-9][0-9]*
 	var {return Var;}
 	defun	{return Def;}
 	defpro	{return Dep;}
-	{I} {yylval.str = strdup(yytext);return I;}
+	0|{I} {yylval.str = strdup(yytext);return I;}
 	skip  {return Sk;}
 	if  {return If;}
 	then {return Th;}
@@ -36,7 +36,7 @@ I [1-9][0-9]*
 	"-" {return Mo;}
 	"*" {return Mu;}
 	"="	{return Eq;}
-	"<="	{return Lt;}
+	"<"	{return Lt;}
 	"(" {return openPar;}
 	")" {return closePar;}
 	"[" {return openCro;}
@@ -51,12 +51,12 @@ I [1-9][0-9]*
 	{V} {yylval.str = strdup(yytext);return V;}
 	"/*" {BEGIN Comment;}
 	[ /t]  {;}
-	\/n	{line++;}
+	\/n	{;}
 	. {;}
 }
 <Comment>{
 	"*/" {BEGIN INITIAL;}
-	\/n	{line++;}
+	\/n	{;}
 	. {;}
 }
 %%

@@ -8,12 +8,52 @@
 char* strdup(const char *s);
 int isdigit(int c);
 
-Node create_Node(char *value, Node leftChild, Node rightChild){
+Node create_Node(char *value, Type mtype, Node leftChild, Node rightChild){
   Node node = (Node)malloc(sizeof(struct noeud));
   node->value = strdup(value);
+  node->m_type = mtype;
   node->rightChild = rightChild;
   node->leftChild = leftChild;
   return node;
+}
+
+Type create_Type(int dim, int mtype){
+  Type newType = (Type)malloc(sizeof(struct _type));
+  newType->dim = dim;
+  newType->def = mtype;
+  return newType;
+}
+
+
+Type searchType(Node typeSearched, Node def){
+  if(typeSearched == NULL){return NULL;}
+  if(!strcmp(typeSearched->value, def->value)){
+    return def->m_type;
+  }
+  Type FGType = searchType(typeSearched, def->leftChild);
+  Type FDType = searchType(typeSearched, def->rightChild);
+  if(FGType->def == typeSearched->m_type->def){
+    return  FGType;
+  }else if(FDType->def == typeSearched->m_type->def){
+    return  FDType;
+  }
+  return NULL;
+}
+
+int searchVar(Node varSearched, Node def){
+  if(varSearched == NULL){return 0;}
+  if(!strcmp(varSearched->value, def->value)){
+    return 1;
+  }
+  int tmp = searchVar(varSearched, def->leftChild);
+  if(tmp){
+    return tmp;
+  }
+  tmp = searchVar(varSearched, def->rightChild);
+  if(tmp){
+    return tmp;
+  }
+  return 0;
 }
 
 void printNode(Node node){
