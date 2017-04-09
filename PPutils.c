@@ -7,6 +7,7 @@
 #include <stdbool.h>
 char* strdup(const char *s);
 int isdigit(int c);
+int strcmp(const char *str1, const char *str2);
 
 Node create_Node(char *value, Type mtype, Node leftChild, Node rightChild){
   Node node = (Node)malloc(sizeof(struct noeud));
@@ -17,6 +18,10 @@ Node create_Node(char *value, Type mtype, Node leftChild, Node rightChild){
   return node;
 }
 
+Node fusionNode(Type type, Node nodeLC, Node nodeRC){
+  return create_Node("",type, nodeLC, nodeRC);
+}
+
 Type create_Type(int dim, int mtype){
   Type newType = (Type)malloc(sizeof(struct _type));
   newType->dim = dim;
@@ -24,36 +29,44 @@ Type create_Type(int dim, int mtype){
   return newType;
 }
 
-
-Type searchType(Node typeSearched, Node def){
-  if(typeSearched == NULL){return NULL;}
-  if(!strcmp(typeSearched->value, def->value)){
-    return def->m_type;
+Node searchVar(Node varSearched, Node def){
+  if(def == NULL){return def;}  
+  //printf("%s : %s\n", varSearched->value, def->value);
+  if(!strcmp(varSearched->value, def->value)){
+    return def;
   }
-  Type FGType = searchType(typeSearched, def->leftChild);
-  Type FDType = searchType(typeSearched, def->rightChild);
-  if(FGType->def == typeSearched->m_type->def){
-    return  FGType;
-  }else if(FDType->def == typeSearched->m_type->def){
-    return  FDType;
+  Node tmp = searchVar(varSearched, def->leftChild);
+  if(tmp != NULL){
+    return tmp;
+  }
+  tmp = searchVar(varSearched, def->rightChild);
+  if(tmp != NULL){
+    return tmp;
   }
   return NULL;
 }
 
-int searchVar(Node varSearched, Node def){
-  if(varSearched == NULL){return 0;}
-  if(!strcmp(varSearched->value, def->value)){
-    return 1;
+Node myFather(Node child, Node def){
+  if(def == NULL) {return NULL;}
+  if(def->rightChild != NULL && !strcmp(child->value, def->rightChild->value)){
+    return def;
   }
-  int tmp = searchVar(varSearched, def->leftChild);
-  if(tmp){
+  if(def->leftChild != NULL && !strcmp(child->value,def->leftChild->value)){
+    printf("return Normal\n");
+    return def;
+  }
+  Node tmp = myFather(child, def->leftChild);
+  if(tmp != NULL){
+    printf("return filsGauche\n");
     return tmp;
   }
-  tmp = searchVar(varSearched, def->rightChild);
-  if(tmp){
+  tmp = myFather(child, def->rightChild);
+  if(tmp != NULL){
+    printf("return filsDroit\n");
     return tmp;
   }
-  return 0;
+  printf("return macouilles\n");
+  return NULL; 
 }
 
 void printNode(Node node){

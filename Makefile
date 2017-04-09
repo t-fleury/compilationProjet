@@ -6,7 +6,7 @@ LFLAGS = -lfl
 # YACC FLAGS
 YFLAGS = -d --report=all
 # .H FILES
-INCLUDE = .include/
+#INCLUDE = .include/
 
 run:$(F)
 ifneq ($(F),)
@@ -33,4 +33,4 @@ $(F): $(F).yacc.o $(F).lex.o
 
 
 clean:
-	rm -f *.exe *.o *.output *.dot *.png
+	rm -f *.o *.output *.dot *.png

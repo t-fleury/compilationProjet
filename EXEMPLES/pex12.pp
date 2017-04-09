@@ -6,7 +6,8 @@ defun MIN(X : array of integer, indmax : integer): integer
 var n : integer,
 var valmin : integer
 
-n := 0; valmin := X[0];
+n := 0;
+valmin := X[0];
 n := n+1;
 while n < indmax do
     { if X[n] < valmin

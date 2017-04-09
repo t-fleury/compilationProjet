@@ -14,9 +14,10 @@ typedef struct noeud{
 } *Node;
 
 Node create_Node(char *value, Type mtype, Node rightChild, Node leftChild);
+Node fusionNode(Type type, Node nodeLC, Node nodeRC);
 Type create_Type(int dim, int mtype);
-Type searchType(Node typeSearched, Node def);
-int searchVar(Node varSearched, Node def);
+Node searchVar(Node varSearched, Node def);
+Node myFather(Node child, Node def);
 void printNode(Node node);
 int eval(char* op, int arg1, int arg2);
 
