@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.24)  1 APR 2017 18:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.24)  10 APR 2017 18:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**Bio-Informatique.tex
-(./Bio-Informatique.tex
+**compilation.tex
+(./compilation.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/report.cls
@@ -348,8 +348,8 @@ File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 \Gin@req@height=\dimen118
 \Gin@req@width=\dimen119
 )
-(./Bio-Informatique.aux)
-\openout1 = `Bio-Informatique.aux'.
+(./compilation.aux)
+\openout1 = `compilation.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
@@ -436,9 +436,9 @@ LaTeX Info: Redefining \ref on input line 13.
 LaTeX Info: Redefining \pageref on input line 13.
 LaTeX Info: Redefining \nameref on input line 13.
 
-(./Bio-Informatique.out) (./Bio-Informatique.out)
+(./compilation.out) (./compilation.out)
 \@outlinefile=\write3
-\openout3 = `Bio-Informatique.out'.
+\openout3 = `compilation.out'.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -469,7 +469,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<universite-Bordeaux.jpg, id=16, 1124.2pt x 245.91875pt>
+<universite-Bordeaux.jpg, id=56, 1124.2pt x 245.91875pt>
 File: universite-Bordeaux.jpg Graphic file (type jpg)
 
 <use universite-Bordeaux.jpg>
@@ -492,23 +492,21 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 24.88pt on input line 25.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 14.4pt on input line 32.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.3599pt on input line 32.
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./unive
-rsite-Bordeaux.jpg>] (./Bio-Informatique.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 2.
+rsite-Bordeaux.jpg>] (./compilation.toc
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 3.
+(Font)              scaled to size 12.0pt on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 5.
 )
 \tf@toc=\write4
-\openout4 = `Bio-Informatique.toc'.
+\openout4 = `compilation.toc'.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 36--37
@@ -519,64 +517,134 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.40 \end{center}
-                 ~\\[1.5cm] [1
+l.39 \chapter
+             {Introduction} [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 40--41
-
- []
-
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 41.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 17.28pt on input line 41.
-
-Underfull \hbox (badness 10000) in paragraph at lines 41--42
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 45--46
-
- []
-
-[2]
 Chapitre 1.
+[2
 
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 55.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 57.
+]
+Chapitre 2.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 14.4pt on input line 48.
 [3
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 57.
- (./Bio-Informatique.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 57.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 57.
-Package rerunfilecheck Info: File `Bio-Informatique.out' has not changed.
-(rerunfilecheck)             Checksum: E51179E9C1E1953AA79B2D210D90B206;147.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 57.
+Chapitre 3.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 17.28pt on input line 55.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 17.28pt on input line 55.
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+
+ []
+
+[4
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 86.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 86.
+
+Overfull \hbox (3.06926pt too wide) in paragraph at lines 89--90
+[]\T1/LinuxLibertineT-TLF/b/n/14.4 Paramètres : \T1/LinuxLibertineT-TLF/m/n/14.
+4 va-lue (char *), mtype (Type), right-Child (Node), left-Child (Node) ; 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+
+Overfull \hbox (10.57164pt too wide) in paragraph at lines 97--98
+[]\T1/LinuxLibertineT-TLF/b/n/14.4 Paramètres : \T1/LinuxLibertineT-TLF/m/n/14.
+4 fi-le-name (char *), type (Type), left-Child (Node), right-Child (Node) ; 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+
+ []
+
+[6]
+Chapitre 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--148
+
+ []
+
+<arbre.jpg, id=103, 712.6625pt x 469.755pt>
+File: arbre.jpg Graphic file (type jpg)
+ <use arbre.jpg>
+Package pdftex.def Info: arbre.jpg used on input line 158.
+(pdftex.def)             Requested size: 427.6008pt x 281.85518pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+
+ []
+
+[7
+
+] [8 <./arbre.jpg (PNG copy)>]
+Chapitre 5.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 177.
+[9
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 177.
+ (./compilation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 177.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 177.
+Package rerunfilecheck Info: File `compilation.out' has not changed.
+(rerunfilecheck)             Checksum: 8F80B623593D6D978A642C107B5FFEC6;836.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 177.
  ) 
 Here is how much of TeX's memory you used:
- 8335 strings out of 493014
- 130098 string characters out of 6133350
- 210863 words of memory out of 5000000
- 11771 multiletter control sequences out of 15000+600000
- 61074 words of font info for 44 fonts, out of 8000000 for 9000
+ 8374 strings out of 493014
+ 130478 string characters out of 6133350
+ 213852 words of memory out of 5000000
+ 11794 multiletter control sequences out of 15000+600000
+ 61981 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,5n,35p,496b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,5n,35p,490b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc
 }{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}<
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineT.p
 fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertin
 eTB.pfb>
-Output written on Bio-Informatique.pdf (4 pages, 214014 bytes).
+Output written on compilation.pdf (10 pages, 256303 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 30 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 115 words of extra memory for PDF output out of 10000 (max. 10000000)
 

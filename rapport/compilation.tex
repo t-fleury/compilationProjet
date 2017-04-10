@@ -1,0 +1,180 @@
+\documentclass[12pt, openany]{report}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[frenchb]{babel}
+\usepackage{libertine}
+\usepackage{hyperref}
+\usepackage[pdftex]{graphicx}
+
+%Ajouter des règles
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+				
+\begin{document}
+
+	% Page de présentation
+	\begin{titlepage}
+	\begin{center}
+		 \includegraphics[scale=0.45]{universite-Bordeaux.jpg}~\\[1.5cm]
+		\textsc{\LARGE Licence 3 Informatique}\\[2cm]
+		
+		\textsc{\Large Rapport en Compilation}\\[1.5cm]
+		
+		% Titre
+		\HRule \\[0.4cm]
+		{  \huge{\bfseries Projet Compilation}\\[0.4cm] }
+		\HRule \\[2cm]
+		
+		% Auteurs
+		\textsc{GUILBAULT Maxime, BARRIERE Antoine, FLEURY Thomas, MAYOLINI Maxime}\\[0.4cm]
+		
+		% Bas de page
+    		{\large \today}
+	\end{center}
+	\end{titlepage}
+	
+	\tableofcontents~\\
+
+% Première Partie 
+\chapter{Introduction}
+\large{Nous sommes un groupe de 4 étudiants en Licence 3 d?Informatique de l?Université de Bordeaux composé de MAYOLINI Maxime, FLEURY Thomas, BARRIERE Antoine et GUILBAULT Maxime. Ce document correspond au compte-rendu du projet de Compilation que nous avons dû réaliser dans le courant de notre sixième semestre. Le projet consiste à analyser le langage Pseudo-Pascal, à l'interpréter, le traduire en C3A et à écrire un interprète de C3A. 
+
+Pour cela, nous utilisons le Flex et le Bison comme langage afin de pouvoir analyser la grammaire et ainsi traduire afin de pouvoir faire un compilateur de Pseudo-Pascal en C3A.
+}
+
+\chapter{Outils utilisés}
+Pour notre projet, nous avons utilisé différents outils tels que :
+\begin{itemize}
+\item \textbf{Atom :} l'éditeur principal pour coder. Il permet, avec les plugins configurés, d'avoir un code lisible et l'auto-complétion. De plus, cela permet de gagner en temps.
+\item \textbf{Github :} utilisé afin de versionner le code et de pouvoir développer à plusieurs.
+\end{itemize}
+
+% Deuxième partie
+\chapter{Architecture du code}
+
+\section{Description des structures}
+Nous utilisons diverses structures dans notre code :
+\begin{itemize}
+\item \textbf{Type :} il est composé :
+	\begin{itemize}
+    \item d'un entier "dim" représentant la dimension d'un tableau dans le cas où le type est un array. 
+    \item d'un entier "def" définissant le type où l'entier 1 représente un int, 2 un boolean, et 3 un array
+    \end{itemize}
+\item \textbf{Node :} il est composé d'une chaîne de caractères "value" représentant sa valeur, d'un type "m\_type" représentant son type, de deux noeuds "rightChild" et "leftChild" représentant respectivement ses fils gauche et droit.
+\end{itemize}
+
+
+\section{Description générale des fichiers}
+Le code est implémenté sur deux fichiers :
+\begin{itemize}
+\item \textbf{ppascal.y} : vérifie que la syntaxe du langage est correcte ;
+\item \textbf{ppascal.l} : vérifie que le lexique du langage (c'est-à-dire les chaînes de caractères utilisées) est correct. \\
+\end{itemize}
+
+Par ailleurs, il peut appeler différentes fonctions implémentées sur d'autres fichiers C :
+\begin{itemize}
+\item \textbf{PPutils.c} : permet de générer des Arbres de Syntaxe Abstraite (AST) ;
+\item \textbf{environ.c} : permet de générer des environnements de variables ;
+\item \textbf{bilquad.c} : permet de générer le code en C3A ;
+\item \textbf{util.c} : contient les structures et les fonctions que nous ont donné les enseignants pour la réalisation de ce projet.
+\end{itemize}
+
+\section{Description détaillée des fichiers}
+Nous avons mis les fonctions que nous avons créées dans notre fichier PPutils. Comme les autres fichiers nous ont été donnés par les enseignants, nous n'en voyons pas l'utilité de les décrire à nouveau.
+\subsection{PPutils.c} ~\\[0.1cm]
+
+\underline{\textbf{Création de noeud}}
+\begin{itemize}
+\item \textbf{Nom de la fonction :} create\_Node() ;
+\item \textbf{Paramètres :} value (char *), mtype (Type), rightChild (Node), leftChild (Node) ;
+\item \textbf{Principe :} permet de créer un noeud ;
+\item \textbf{Fonctionnement :} on déclare un noeud, auquel on attribue comme valeur "value", comme type "mtype", comme fils gauche "leftChild", comme fils droit "rightChild", puis on le retourne.\\
+\end{itemize}
+
+\underline{\textbf{Fusion de noeud}}
+\begin{itemize}
+\item \textbf{Nom de la fonction :} fusionNode() ;
+\item \textbf{Paramètres :} filename (char *), type (Type), leftChild (Node), rightChild (Node) ;
+\item \textbf{Principe :} elle permet la fusion de deux noeuds entre eux ;
+\item \textbf{Fonctionnement :} elle retourne tout simplement la fusion de deux noeuds dans un autre noeud. Nous avons un nouveau noeud composé de 2 fils qui sont les noeuds "leftChild" et "rightChild". \\
+\end{itemize}
+
+\underline{\textbf{Création de type}}
+\begin{itemize}
+\item \textbf{Nom de la fonction :}  create\_Type() ;
+\item \textbf{Paramètres :} dim (int), mtype (int) ;
+\item \textbf{Principe :} elle permet donner un type particulier à nos noeuds. Cela nous est utile pour l'analyse sémantique;
+\item \textbf{Fonctionnement :} on déclare un type, auquel on attribue comme dimension "dim" et comme type "mtype" puis on le retourne .\\
+\end{itemize}
+
+\underline{\textbf{Recherche d'une variable }}
+\begin{itemize}
+\item \textbf{Nom de la fonction :}  searchVar() ;
+\item \textbf{Paramètres :} searched (Node), def (Node) ;
+\item \textbf{Principe :} elle permet de vérifier si une variable est bien définie. Elle est utilisée pour l'analyse sémantique ; 
+\item \textbf{Fonctionnement :} tout d'abord on vérifie que le noeud que l'on donne en définition existe, puis nous comparons la valeur du noeud que l'on recherche avec celui défini. La fonction est récursive, elle remonte l'arbre jusqu'au dernier noeud défini. Si le noeud recherché est défini, alors il renvoie la définition, Sinon la fonction renvoie NULL. \\
+\end{itemize}
+
+\underline{\textbf{Affichage de l'arbre}}
+\begin{itemize}
+\item \textbf{Nom de la fonction :}  printNode() ;
+\item \textbf{Paramètres :} n½ud (Node) ;
+\item \textbf{Principe :} elle permet d'afficher l'arbre ; 
+\item \textbf{Fonctionnement :} tout d'abord, on vérifie que le noeud que l'on donne n'est pas NULL. Puis il va afficher le noeud ainsi que ses fils qui sont le fils droit et fils gauche. Cette fonction est récursive, ce qui permet d'afficher l'arbre entier (utile pour répondre à la question 2). \\
+\end{itemize}
+
+\underline{\textbf{Récupérer le type}}
+\begin{itemize}
+\item \textbf{Nom de la fonction :}  getVarType() ;
+\item \textbf{Paramètres :}  child (Node),  def(Node) ;
+\item \textbf{Principe :}  récupérer le type ;
+\item \textbf{Fonctionnement :} cherche le type grâce à la fonction searchvar().\\
+\end{itemize}
+
+% Troisième partie
+\chapter{Développement}
+\section{Création d'un noeud}
+\large{La création de noeud permet par la suite de créer l'arbre qui nous permettra de faire l'interpréteur. Un noeud est constitué d'une value, d'un type, d'un fils gauche et d'un fils droit, avec la possibilité de n'avoir que un seul fils ou aucun.}
+\newline
+\newline
+ Node create\_Node(char *value, Type mtype, Node leftChild, Node rightChild)\{
+\newline  Node node = (Node)malloc(sizeof(struct noeud));
+\newline  node - >value = strdup(value);
+\newline  node - >m\_type = mtype;
+\newline  node - >rightChild = rightChild;
+\newline  node - >leftChild = leftChild;
+\newline  return node;
+\newline\}
+
+\section{Création de l'AST}
+
+\large{Pour le premier exemple on obtient l'arbre suivant }
+\begin{itemize}
+\item{var X1 : integer,}
+\item{var X2 : integer}
+\item{X2 := 10 ;}
+\item{X1 := X2}
+\end{itemize}
+\includegraphics[scale=0.60]{arbre.jpg}\\
+
+\large{* représente l'emplacement des éventuelles définitions de fonctions et procédures, mais ici comme il y en a pas, le fils droit est vide}
+
+
+
+\chapter{Problèmes rencontrés et solutions envisagées}
+\section{Problèmes rencontrés}
+Dans ce projet nous avons été confrontés à plusieurs problèmes : 
+\begin{itemize}
+\item Problème sur la compréhension de la grammaire (PPascal inconnu) ;
+\item Problème sur la construction de l'arbre ;
+\item Problème de segmentation fault.
+\end{itemize}
+
+\section{Solutions envisagées}
+Pour l'interpréteur : à l'aide d'une fonction récursive, on regarde la valeur du noeud. S'il s'agit d'une variable, alors on la stocke dans un tableau de variables (si elle y est déjà, alors on met sa valeur à jour). S'il s'agit d'une opération, alors on l'exécute sur les deux noeuds fils. S'il s'agit d'une condition (if, while, etc), alors selon si la condition dans le noeud fils gauche est vraie ou non, on exécute ou non le noeud fils droit.
+
+
+\end{document}  
+
+
+
