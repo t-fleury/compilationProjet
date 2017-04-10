@@ -43,7 +43,7 @@ Node temp; //Utilisé pour enregistrer un noeud
 
 %%
 MP: L_vart LD C {
-  Node def = create_Node("Mp", NULL, defVar, defFP);
+  Node def = create_Node("", NULL, $1, $2);
   $$ = create_Node("Mp", NULL, def, $3);
   printNode($$);
   printf("\n");
@@ -64,8 +64,8 @@ E: E Pl E {$$ = create_Node("Pl",create_Type(0,1),$1,$3);}
       printf("Variable non définie\n") ;
       exit(0);
     }else{
-      temp = myFather(temp, defVar);
-      $$ = create_Node($1, temp->rightChild->m_type, NULL,NULL);
+      temp = getVarType(temp, defVar);
+      $$ = create_Node($1, temp->m_type, NULL,NULL);
     }
    }
  | true {$$ = create_Node("true",create_Type(0,2),NULL,NULL);}
@@ -87,7 +87,7 @@ E: E Pl E {$$ = create_Node("Pl",create_Type(0,1),$1,$3);}
       printf("Variable non définie\n") ;
       exit(0);
     }
-     
+
   }
    | Et openCro E  closeCro {
      $$ = create_Node("tab", NULL,$1, $3);
@@ -95,8 +95,8 @@ E: E Pl E {$$ = create_Node("Pl",create_Type(0,1),$1,$3);}
 
 C: C Se C {$$ = create_Node("Se",NULL,$1,$3);}
  | Et Af E  {
-   temp = myFather($1,defVar);
-   if(temp != NULL && temp->rightChild->m_type == $3->m_type){
+   temp = getVarType($1,defVar);
+   if(temp != NULL && temp->m_type->def == $3->m_type->def){
      $$ = create_Node("Af", NULL,$1, $3);
    }else{
      printf("Erreur typage\n");
@@ -105,19 +105,29 @@ C: C Se C {$$ = create_Node("Se",NULL,$1,$3);}
  }
  | V Af E {
     Node variable = create_Node($1,NULL,  NULL, NULL);
-    if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
-      printNode(defVar);
-      temp = myFather(variable,defVar);
-      if(temp != NULL && temp->rightChild->m_type == $3->m_type){
+    printf("%s\n", $3->value);
+    if(!strcmp($3->value,"NewAr")){
+      printf("COUCOU\n");
+      if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
         $$ = create_Node("Af", NULL,variable, $3);
+        }else{
+          printf("Variable non définie\n") ;
+          exit(0);
+        }
       }else{
-        printf("Erreur typage\n");
-        exit(0);
-      }    
-    }else{
-      printf("Variable non définie\n") ;
-      exit(0);
-    }
+        if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
+          temp = getVarType(variable,defVar);
+          if(temp != NULL && temp->m_type->def == $3->m_type->def){
+            $$ = create_Node("Af", NULL,variable, $3);
+            }else{
+              printf("Erreur typage\n");
+              exit(0);
+            }
+          }else{
+            printf("Variable non définie\n") ;
+            exit(0);
+          }
+      }
   }
  | Sk {$$ = create_Node("skip", NULL,NULL, NULL);}
  | openAco C closeAco {$$ = $2;}
@@ -145,8 +155,7 @@ L_argtnn: Argt {$$ = $1;}
         | L_argtnn Vir Argt {$$ = create_Node("argt", NULL,$1, $3);}
 
 Argt : V DPoint TP {
-    Node var = create_Node($1,NULL,  NULL, NULL);
-    $$ = create_Node("Var", NULL,var, $3);
+    $$ = create_Node($1, NULL,NULL, $3);
 }
 
 TP: T_boo  {$$ = create_Node("boolean",create_Type(0,2), NULL, NULL);}
@@ -155,15 +164,16 @@ TP: T_boo  {$$ = create_Node("boolean",create_Type(0,2), NULL, NULL);}
 
 L_vart: %empty {$$ = NULL;}
         |L_vartnn  {
+          $$ = create_Node("defVar",NULL, $1, NULL);
           if(defVar == NULL){
-            defVar = create_Node("defVar",NULL, $1, NULL);
+            defVar = $$;
           }else{
-            defVar = fusionNode(NULL, defVar, create_Node("",NULL, $1, NULL));
+            defVar = fusionNode(NULL, defVar, $$);
           }
         }
 
 L_vartnn: Var Argt {$$ = $2;}
-        | L_vartnn Vir Var Argt {$$ = create_Node("", NULL,$1, $4);}
+        | L_vartnn Vir Var Argt {$$ = create_Node("defVar1", NULL,$1, $4);}
 
 D_entp: Dep V openPar L_argt closePar {
   Node name = create_Node($2,NULL, NULL,NULL);

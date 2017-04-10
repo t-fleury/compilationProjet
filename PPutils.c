@@ -30,8 +30,7 @@ Type create_Type(int dim, int mtype){
 }
 
 Node searchVar(Node varSearched, Node def){
-  if(def == NULL){return def;}  
-  //printf("%s : %s\n", varSearched->value, def->value);
+  if(def == NULL){return def;}
   if(!strcmp(varSearched->value, def->value)){
     return def;
   }
@@ -46,28 +45,11 @@ Node searchVar(Node varSearched, Node def){
   return NULL;
 }
 
-Node myFather(Node child, Node def){
-  if(def == NULL) {return NULL;}
-  if(def->rightChild != NULL && !strcmp(child->value, def->rightChild->value)){
-    return def;
-  }
-  if(def->leftChild != NULL && !strcmp(child->value,def->leftChild->value)){
-    printf("return Normal\n");
-    return def;
-  }
-  Node tmp = myFather(child, def->leftChild);
-  if(tmp != NULL){
-    printf("return filsGauche\n");
-    return tmp;
-  }
-  tmp = myFather(child, def->rightChild);
-  if(tmp != NULL){
-    printf("return filsDroit\n");
-    return tmp;
-  }
-  printf("return macouilles\n");
-  return NULL; 
+Node getVarType(Node child, Node def){
+  Node tmp = searchVar(child, def);
+  return(tmp->rightChild);
 }
+
 
 void printNode(Node node){
   if(node == NULL){printf("NULL\n");return;}
