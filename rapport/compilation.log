@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.24)  10 APR 2017 18:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.24)  10 APR 2017 21:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -628,10 +628,10 @@ Package rerunfilecheck Info: File `compilation.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 177.
  ) 
 Here is how much of TeX's memory you used:
- 8374 strings out of 493014
- 130478 string characters out of 6133350
+ 8372 strings out of 493014
+ 130455 string characters out of 6133350
  213852 words of memory out of 5000000
- 11794 multiletter control sequences out of 15000+600000
+ 11792 multiletter control sequences out of 15000+600000
  61981 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  30i,5n,35p,490b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -641,7 +641,7 @@ Here is how much of TeX's memory you used:
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineT.p
 fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertin
 eTB.pfb>
-Output written on compilation.pdf (10 pages, 256303 bytes).
+Output written on compilation.pdf (10 pages, 256231 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  119 compressed objects within 2 object streams
