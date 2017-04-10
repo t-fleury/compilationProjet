@@ -537,10 +537,10 @@ static const yytype_uint8 yyrline[] =
 {
        0,    45,    45,    52,    53,    54,    55,    56,    57,    58,
       59,    60,    61,    62,    71,    72,    73,    77,    80,    82,
-      92,    96,    97,   106,   132,   133,   134,   138,   139,   145,
-     146,   148,   149,   151,   152,   154,   155,   157,   161,   162,
-     163,   165,   166,   175,   176,   178,   188,   199,   203,   208,
-     209
+      92,    96,    97,    98,   116,   117,   118,   122,   123,   129,
+     130,   132,   133,   135,   136,   138,   139,   141,   145,   146,
+     147,   149,   150,   159,   160,   162,   172,   183,   187,   192,
+     193
 };
 #endif
 
@@ -1514,7 +1514,7 @@ yyreduce:
     {
      Node var = create_Node((yyvsp[-3].str),NULL,  NULL, NULL);
      if(searchVar(var,defVar)!=NULL){
-       (yyval.node) = create_Node("tabSimple", NULL,var, (yyvsp[-1].node));
+       (yyval.node) = create_Node("tabSimple", create_Type(0, 3),var, (yyvsp[-1].node));
      }else{
       printf("Variable non définie\n") ;
       exit(0);
@@ -1527,7 +1527,7 @@ yyreduce:
   case 20:
 #line 92 "ppascal.y" /* yacc.c:1646  */
     {
-     (yyval.node) = create_Node("tab", NULL,(yyvsp[-3].node), (yyvsp[-1].node));
+     (yyval.node) = create_Node("tab", create_Type(0, 3),(yyvsp[-3].node), (yyvsp[-1].node));
    }
 #line 1533 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1540,25 +1540,15 @@ yyreduce:
 
   case 22:
 #line 97 "ppascal.y" /* yacc.c:1646  */
-    {
-   temp = getVarType((yyvsp[-2].node),defVar);
-   if(temp != NULL && temp->m_type->def == (yyvsp[0].node)->m_type->def){
-     (yyval.node) = create_Node("Af", NULL,(yyvsp[-2].node), (yyvsp[0].node));
-   }else{
-     printf("Erreur typage\n");
-     exit(0);
-  }
- }
-#line 1553 "y.tab.c" /* yacc.c:1646  */
+    {(yyval.node) = create_Node("Af", NULL,(yyvsp[-2].node), (yyvsp[0].node));}
+#line 1545 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 106 "ppascal.y" /* yacc.c:1646  */
+#line 98 "ppascal.y" /* yacc.c:1646  */
     {
     Node variable = create_Node((yyvsp[-2].str),NULL,  NULL, NULL);
-    printf("%s\n", (yyvsp[0].node)->value);
-    if(!strcmp((yyvsp[0].node)->value,"NewAr")){
-      printf("COUCOU\n");
+    if(!strcmp((yyvsp[0].node)->value,(yyvsp[-2].str))){
       if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
         (yyval.node) = create_Node("Af", NULL,variable, (yyvsp[0].node));
         }else{
@@ -1567,140 +1557,134 @@ yyreduce:
         }
       }else{
         if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
-          temp = getVarType(variable,defVar);
-          if(temp != NULL && temp->m_type->def == (yyvsp[0].node)->m_type->def){
-            (yyval.node) = create_Node("Af", NULL,variable, (yyvsp[0].node));
-            }else{
-              printf("Erreur typage\n");
-              exit(0);
-            }
-          }else{
-            printf("Variable non définie\n") ;
-            exit(0);
-          }
+          (yyval.node) = create_Node("Af", NULL,variable, (yyvsp[0].node));
+        }else{
+          printf("Variable non définie\n") ;
+          exit(0);
+        }
       }
   }
-#line 1584 "y.tab.c" /* yacc.c:1646  */
+#line 1568 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 132 "ppascal.y" /* yacc.c:1646  */
+#line 116 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("skip", NULL,NULL, NULL);}
-#line 1590 "y.tab.c" /* yacc.c:1646  */
+#line 1574 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 133 "ppascal.y" /* yacc.c:1646  */
+#line 117 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = (yyvsp[-1].node);}
-#line 1596 "y.tab.c" /* yacc.c:1646  */
+#line 1580 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 134 "ppascal.y" /* yacc.c:1646  */
+#line 118 "ppascal.y" /* yacc.c:1646  */
     {
     Node result = create_Node("", NULL,(yyvsp[-2].node), (yyvsp[0].node));
     (yyval.node)  = create_Node("If", NULL,(yyvsp[-4].node), result);
   }
-#line 1605 "y.tab.c" /* yacc.c:1646  */
+#line 1589 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 138 "ppascal.y" /* yacc.c:1646  */
+#line 122 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("Wh", NULL,(yyvsp[-2].node),(yyvsp[0].node));}
-#line 1611 "y.tab.c" /* yacc.c:1646  */
+#line 1595 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 139 "ppascal.y" /* yacc.c:1646  */
+#line 123 "ppascal.y" /* yacc.c:1646  */
     {
     Node nameFunc = create_Node((yyvsp[-3].str),NULL,  NULL, NULL);
     (yyval.node) = create_Node("callFunc",NULL,nameFunc,(yyvsp[-1].node));
  }
-#line 1620 "y.tab.c" /* yacc.c:1646  */
+#line 1604 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 145 "ppascal.y" /* yacc.c:1646  */
+#line 129 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = NULL;}
-#line 1626 "y.tab.c" /* yacc.c:1646  */
+#line 1610 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 146 "ppascal.y" /* yacc.c:1646  */
+#line 130 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = (yyvsp[0].node);}
-#line 1632 "y.tab.c" /* yacc.c:1646  */
+#line 1616 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 148 "ppascal.y" /* yacc.c:1646  */
+#line 132 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = (yyvsp[0].node);}
-#line 1638 "y.tab.c" /* yacc.c:1646  */
+#line 1622 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 149 "ppascal.y" /* yacc.c:1646  */
+#line 133 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("args", NULL,(yyvsp[-2].node), (yyvsp[0].node));}
-#line 1644 "y.tab.c" /* yacc.c:1646  */
+#line 1628 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 151 "ppascal.y" /* yacc.c:1646  */
+#line 135 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = NULL;}
-#line 1650 "y.tab.c" /* yacc.c:1646  */
+#line 1634 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 152 "ppascal.y" /* yacc.c:1646  */
+#line 136 "ppascal.y" /* yacc.c:1646  */
     {defVar = fusionNode(NULL, defVar, create_Node("",NULL, (yyvsp[0].node), NULL));}
-#line 1656 "y.tab.c" /* yacc.c:1646  */
+#line 1640 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 154 "ppascal.y" /* yacc.c:1646  */
+#line 138 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = (yyvsp[0].node);}
-#line 1662 "y.tab.c" /* yacc.c:1646  */
+#line 1646 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 155 "ppascal.y" /* yacc.c:1646  */
+#line 139 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("argt", NULL,(yyvsp[-2].node), (yyvsp[0].node));}
-#line 1668 "y.tab.c" /* yacc.c:1646  */
+#line 1652 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 157 "ppascal.y" /* yacc.c:1646  */
+#line 141 "ppascal.y" /* yacc.c:1646  */
     {
     (yyval.node) = create_Node((yyvsp[-2].str), NULL,NULL, (yyvsp[0].node));
 }
-#line 1676 "y.tab.c" /* yacc.c:1646  */
+#line 1660 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 161 "ppascal.y" /* yacc.c:1646  */
+#line 145 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("boolean",create_Type(0,2), NULL, NULL);}
-#line 1682 "y.tab.c" /* yacc.c:1646  */
+#line 1666 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 162 "ppascal.y" /* yacc.c:1646  */
+#line 146 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("int",create_Type(0,1), NULL, NULL);}
-#line 1688 "y.tab.c" /* yacc.c:1646  */
+#line 1672 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 163 "ppascal.y" /* yacc.c:1646  */
+#line 147 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("array of ",create_Type(0,3), (yyvsp[0].node), NULL);}
-#line 1694 "y.tab.c" /* yacc.c:1646  */
+#line 1678 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 165 "ppascal.y" /* yacc.c:1646  */
+#line 149 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = NULL;}
-#line 1700 "y.tab.c" /* yacc.c:1646  */
+#line 1684 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 166 "ppascal.y" /* yacc.c:1646  */
+#line 150 "ppascal.y" /* yacc.c:1646  */
     {
           (yyval.node) = create_Node("defVar",NULL, (yyvsp[0].node), NULL);
           if(defVar == NULL){
@@ -1709,23 +1693,23 @@ yyreduce:
             defVar = fusionNode(NULL, defVar, (yyval.node));
           }
         }
-#line 1713 "y.tab.c" /* yacc.c:1646  */
+#line 1697 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 175 "ppascal.y" /* yacc.c:1646  */
+#line 159 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = (yyvsp[0].node);}
-#line 1719 "y.tab.c" /* yacc.c:1646  */
+#line 1703 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 176 "ppascal.y" /* yacc.c:1646  */
+#line 160 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("defVar1", NULL,(yyvsp[-3].node), (yyvsp[0].node));}
-#line 1725 "y.tab.c" /* yacc.c:1646  */
+#line 1709 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 178 "ppascal.y" /* yacc.c:1646  */
+#line 162 "ppascal.y" /* yacc.c:1646  */
     {
   Node name = create_Node((yyvsp[-3].str),NULL, NULL,NULL);
   (yyval.node) = create_Node((yyvsp[-4].str),NULL, name,(yyvsp[-1].node));
@@ -1735,11 +1719,11 @@ yyreduce:
       defFP = fusionNode(NULL,defFP, (yyval.node));
     }
 }
-#line 1739 "y.tab.c" /* yacc.c:1646  */
+#line 1723 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 188 "ppascal.y" /* yacc.c:1646  */
+#line 172 "ppascal.y" /* yacc.c:1646  */
     {
   Node name = create_Node((yyvsp[-5].str),NULL, NULL,NULL);
   Node def = create_Node("", NULL,name, (yyvsp[-3].node));
@@ -1750,41 +1734,41 @@ yyreduce:
       defFP = fusionNode(NULL,defFP, (yyval.node));
     }
 }
-#line 1754 "y.tab.c" /* yacc.c:1646  */
+#line 1738 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 199 "ppascal.y" /* yacc.c:1646  */
+#line 183 "ppascal.y" /* yacc.c:1646  */
     {
   Node node = create_Node("", NULL,(yyvsp[-1].node), (yyvsp[0].node));
   (yyval.node) = create_Node("defproc", NULL,(yyvsp[-2].node), node);
 }
-#line 1763 "y.tab.c" /* yacc.c:1646  */
+#line 1747 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 203 "ppascal.y" /* yacc.c:1646  */
+#line 187 "ppascal.y" /* yacc.c:1646  */
     {
    Node node = create_Node("", NULL,(yyvsp[-1].node), (yyvsp[0].node));
    (yyval.node) = create_Node("defproc", NULL,(yyvsp[-2].node), node);
  }
-#line 1772 "y.tab.c" /* yacc.c:1646  */
+#line 1756 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 208 "ppascal.y" /* yacc.c:1646  */
+#line 192 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = NULL;}
-#line 1778 "y.tab.c" /* yacc.c:1646  */
+#line 1762 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 209 "ppascal.y" /* yacc.c:1646  */
+#line 193 "ppascal.y" /* yacc.c:1646  */
     {(yyval.node) = create_Node("LD", NULL,(yyvsp[-1].node), (yyvsp[0].node));}
-#line 1784 "y.tab.c" /* yacc.c:1646  */
+#line 1768 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1788 "y.tab.c" /* yacc.c:1646  */
+#line 1772 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2012,7 +1996,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 211 "ppascal.y" /* yacc.c:1906  */
+#line 195 "ppascal.y" /* yacc.c:1906  */
 
 
 void yyerror(const char *s){

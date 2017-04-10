@@ -82,7 +82,7 @@ E: E Pl E {$$ = create_Node("Pl",create_Type(0,1),$1,$3);}
  Et: V openCro E closeCro {
      Node var = create_Node($1,NULL,  NULL, NULL);
      if(searchVar(var,defVar)!=NULL){
-       $$ = create_Node("tabSimple", NULL,var, $3);
+       $$ = create_Node("tabSimple", create_Type(0, 3),var, $3);
      }else{
       printf("Variable non définie\n") ;
       exit(0);
@@ -90,24 +90,14 @@ E: E Pl E {$$ = create_Node("Pl",create_Type(0,1),$1,$3);}
 
   }
    | Et openCro E  closeCro {
-     $$ = create_Node("tab", NULL,$1, $3);
+     $$ = create_Node("tab", create_Type(0, 3),$1, $3);
    }
 
 C: C Se C {$$ = create_Node("Se",NULL,$1,$3);}
- | Et Af E  {
-   temp = getVarType($1,defVar);
-   if(temp != NULL && temp->m_type->def == $3->m_type->def){
-     $$ = create_Node("Af", NULL,$1, $3);
-   }else{
-     printf("Erreur typage\n");
-     exit(0);
-  }
- }
+ | Et Af E  {$$ = create_Node("Af", NULL,$1, $3);}
  | V Af E {
     Node variable = create_Node($1,NULL,  NULL, NULL);
-    printf("%s\n", $3->value);
-    if(!strcmp($3->value,"NewAr")){
-      printf("COUCOU\n");
+    if(!strcmp($3->value,$1)){
       if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
         $$ = create_Node("Af", NULL,variable, $3);
         }else{
@@ -116,17 +106,11 @@ C: C Se C {$$ = create_Node("Se",NULL,$1,$3);}
         }
       }else{
         if(searchVar(variable,defVar) != NULL || searchVar(variable,defFP)!= NULL){
-          temp = getVarType(variable,defVar);
-          if(temp != NULL && temp->m_type->def == $3->m_type->def){
-            $$ = create_Node("Af", NULL,variable, $3);
-            }else{
-              printf("Erreur typage\n");
-              exit(0);
-            }
-          }else{
-            printf("Variable non définie\n") ;
-            exit(0);
-          }
+          $$ = create_Node("Af", NULL,variable, $3);
+        }else{
+          printf("Variable non définie\n") ;
+          exit(0);
+        }
       }
   }
  | Sk {$$ = create_Node("skip", NULL,NULL, NULL);}
